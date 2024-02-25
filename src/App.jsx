@@ -3,6 +3,9 @@ import "./index.css";
 
 function App() {
   const [questionNo, setQuestionNo] = useState(0);
+  const [selectOption, setSelectOption] = useState(null);
+  const [isAnswercorrect, setIsAnswerCorrect] = useState(null);
+  const [score, setScore] = useState(0);
   const quizquestions = [
     {
       question: "What is time complexity of binary search ?",
@@ -36,16 +39,17 @@ function App() {
   const changeQuestion = () => {
     if (questionNo === quizquestions.length - 1) return;
     setQuestionNo(questionNo + 1);
+    setIsAnswerCorrect(null);
+    setSelectOption(null);
   };
 
-const questionStatus =(result)=>{
- /*  console.log(quizquestions[questionNo].options[0].isCorrect); */
-if(result){
-console.log("Correct answer");
-}else{
-console.log("Wrong answer");
-}
-}
+  const questionStatus = (result, index) => {
+    setSelectOption(index);
+    setIsAnswerCorrect(result.isCorrect);
+    if (result.isCorrect) {
+      setScore(score + 1);
+    }
+  };
 
   return (
     <div>
@@ -58,10 +62,25 @@ console.log("Wrong answer");
             <div className="question-text">
               {quizquestions[questionNo].question}
             </div>
+            <h2>Score : {score}</h2>
           </div>
           <div className="answer-section">
-            {quizquestions[questionNo].options.map((options) => (
-              <button onClick={()=>questionStatus(options.isCorrect)}>{options.answer}</button>
+            {quizquestions[questionNo].options.map((options, index) => (
+              <button
+                style={{
+                  backgroundColor:
+                    selectOption === index
+                      ? isAnswercorrect
+                        ? "green"
+                        : "red"
+                      : "initial",
+                }}
+                disabled={selectOption != null}
+                key={index}
+                onClick={() => questionStatus(options, index)}
+              >
+                {options.answer}
+              </button>
             ))}
           </div>
         </div>
