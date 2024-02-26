@@ -1,6 +1,7 @@
 import { useState } from "react";
 import "./index.css";
 import Geolocationcontainer from "./Components/Geolocation/Geolocationcontainer";
+import Geolocation from "./Components/Geolocation/Geolocation";
 function App() {
   const [questionNo, setQuestionNo] = useState(0);
   const [selectOption, setSelectOption] = useState(null);
@@ -53,7 +54,9 @@ function App() {
 
   return (
     <div>
-    <Geolocationcontainer />
+    <Geolocationcontainer >
+<Geolocation />
+      </Geolocationcontainer>
       <div className="card-wrapper">
         <div className="app">
           <div className="question-section">

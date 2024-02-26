@@ -1,7 +1,7 @@
 import Geolocation from "./Geolocation";
 import { useEffect, useState } from "react";
 
-export default function geolocationcontainer() {
+export default function geolocationcontainer({children}) {
   const [latitude, setLatitude] = useState(null);
   const [longitude, setlongitude] = useState(null);
 
@@ -17,5 +17,11 @@ export default function geolocationcontainer() {
     }
   }, []);
 
-  return <Geolocation latitude={latitude} longitude={longitude} />;
+  return (
+//   <Geolocation latitude={latitude} longitude={longitude} />
+        <>
+        {children}
+        </>
+                    
+  )
 }
