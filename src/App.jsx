@@ -1,7 +1,7 @@
 import { useState } from "react";
 import "./index.css";
-import Geolocationcontainer from "./Components/Geolocation/Geolocationcontainer";
 import Geolocation from "./Components/Geolocation/Geolocation";
+import { useGeoLocationcontainer } from "./hooks/useGeoLocationcontainer";
 function App() {
   const [questionNo, setQuestionNo] = useState(0);
   const [selectOption, setSelectOption] = useState(null);
@@ -52,11 +52,12 @@ function App() {
     }
   };
 
+  const { latitude, longitude } = useGeoLocationcontainer();
   return (
     <div>
-    <Geolocationcontainer >
-<Geolocation />
-      </Geolocationcontainer>
+
+        <Geolocation  />
+      
       <div className="card-wrapper">
         <div className="app">
           <div className="question-section">

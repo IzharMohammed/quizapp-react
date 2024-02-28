@@ -1,13 +1,10 @@
-import Geolocation from "./Geolocation";
+import React from "react";
 import { useEffect, useState } from "react";
-
-export default function geolocationcontainer({children}) {
+export const useGeoLocationcontainer = () => {
   const [latitude, setLatitude] = useState(null);
   const [longitude, setlongitude] = useState(null);
 
   const handleLocation = (position) => {
-    console.log(position.coords.latitude);
-    console.log(position.coords.longitude);
     setLatitude(position.coords.latitude);
     setlongitude(position.coords.longitude);
   };
@@ -15,13 +12,7 @@ export default function geolocationcontainer({children}) {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(handleLocation);
     }
-  }, []);
+  }, [navigator]);
 
-  return (
-//   <Geolocation latitude={latitude} longitude={longitude} />
-        <>
-        {children}
-        </>
-                    
-  )
-}
+  return { latitude, longitude };
+};

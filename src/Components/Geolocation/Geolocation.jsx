@@ -1,4 +1,7 @@
-export default function Geolocation({ latitude, longitude }) {
+import { useGeoLocationcontainer } from "../../hooks/useGeoLocationcontainer";
+
+export default function Geolocation() {
+  const { latitude, longitude } = useGeoLocationcontainer();
   return (
     <div>
       <h1>Geolocation</h1>
